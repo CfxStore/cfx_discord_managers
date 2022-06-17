@@ -22,13 +22,13 @@ addRole, removeRole, banUser, unbanUser, kickUser, warnUser, unWarn, checkWarns,
 # Example Usage
 
 ```js
-// Asign a variable to the module to acces it..
+// Assign a variable to the module to acces it..
 const _cfx = require('cfx_discord_managers');
 
 // In this example we will use "quick.db"
 const db = require('quick.db')
 
-// Asign a variable to the GuildUserManager! 
+// Assign a variable to the GuildUserManager! 
 let guildUserManager = new _cfx.getGuildUserManager(db, message, guild)
 
 // Use the module.
