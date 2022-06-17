@@ -1,11 +1,13 @@
 class GuildChannelManager {
-    constructor() {
+    constructor(message) {
+        this.message = message;
     }
 
-    purge(message, amount){
-        message.channel.bulkDelete(amount)
+    purge(amount){
+        this.message.channel.bulkDelete(amount)
     }
 
+    // More comming soon.
 }
 
 module.exports = GuildChannelManager;

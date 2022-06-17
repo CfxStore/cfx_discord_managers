@@ -1,23 +1,24 @@
 class GuildManager {
-    constructor() {
+    constructor(guild) {
+        this.guild = guild;
     }
 
     /*
 ---- ROLES ----
   */
-    createRole(guild, name, color){
-        guild.roles.create({
+    createRole(name, color){
+        this.guild.roles.create({
             name: name,
             color: color,
         })
     }
 
-    deleteRole(guild, role){
-        guild.roles.delete(role)
+    deleteRole(role){
+        this.guild.roles.delete(role)
     }
 
-    createMuteRule(guild){
-        guild.roles.create({
+    createMuteRule(){
+        this.guild.roles.create({
             name: "Muted",
             color: "GREY",
         })
@@ -27,20 +28,20 @@ class GuildManager {
 ---- CHANNELS ----
   */
 
-    createChannel(guild, name, type){
-        guild.channels.create(name, {
+    createChannel(name, type){
+        this.guild.channels.create(name, {
             type: type,
         });
     }
 
-    deleteChannel(guild, role){
-        let guildRole = guild.channels.cache.find(c => c === role)
+    deleteChannel(channel){
+        let guildChannel = this.guild.channels.cache.find(c => c === channel)
 
-        guild.channels.delete(guildRole)
+        this.guild.channels.delete(guildChannel)
     }
 
-    checkChannel(guild, channel){
-        let findChannel = guild.channels.cache.find(c => c === channel)
+    checkChannel(channel){
+        let findChannel = this.guild.channels.cache.find(c => c === channel)
 
         return findChannel;
     }
@@ -48,39 +49,39 @@ class GuildManager {
     /*
 ---- GUILD ----
 */
-    setGuildName(guild, name){
-        guild.setName(name)
+    setGuildName(name){
+        this.guild.setName(name)
     }
 
-    setGuildIcon(guild, icon){
-        guild.setIcon(icon)
+    setGuildIcon(icon){
+        this.guild.setIcon(icon)
     }
 
-    setModerationLevel(guild, level) {
-        guild.setVerificationLevel(level)
+    setModerationLevel(level) {
+        this.guild.setVerificationLevel(level)
     }
 
-    setExplicitLevel(guild, level){
-        guild.setExplicitContentFilter(level)
+    setExplicitLevel(level){
+        this.guild.setExplicitContentFilter(level)
     }
 
-    setSlowMode(message, seconds, reason){
-        message.channel.setRateLimitPerUser(seconds, reason)
+    setSlowMode(seconds, reason){
+        this.message.channel.setRateLimitPerUser(seconds, reason)
     }
 
     /*
 ---- EMOJI'S ----
 */
 
-    createEmoji(guild, url, name){
-        guild.emojis.create(url, name)
+    createEmoji(url, name){
+        this.guild.emojis.create(url, name)
     }
 
-    deleteEmoji(guild, id){
-        let emoji = guild.emojis.cache.find(emoji => emoji.name == value);
+    deleteEmoji(name){
+        let emoji = this.guild.emojis.cache.find(emoji => emoji.name == name);
 
         if(emoji){
-            guild.emojis.delete(emoji)
+            this.guild.emojis.delete(emoji)
         }
 
         if(!emoji){

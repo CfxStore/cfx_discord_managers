@@ -1,22 +1,22 @@
-const GCM = require("./Managers/GuildChannelManager.js")
-const GUM = require("./Managers/GuildUserManager")
-const GM = require("./Managers/GuildManager")
+const GuildChannelManager = require("./Managers/GuildChannelManager.js")
+const GuildUserManager = require("./Managers/GuildUserManager.js")
+const GuildManager = require("./Managers/GuildManager.js")
 
-function initGCM(){
-    return new GCM();
+
+function getGuildChannelManager(message){
+    return new GuildChannelManager(message)
 }
 
-function initGUM(db){
-    return new GUM(db);
+function getGuildUserManager(database, message, guild){
+    return new GuildUserManager(database, message, guild)
 }
 
-function initGM(){
-    return new GM()
+function getGuildManager(guild){
+    return new GuildManager(guild)
 }
-
 
 module.exports = {
-    initGCM,
-    initGUM,
-    initGM
+    getGuildChannelManager,
+    getGuildUserManager,
+    getGuildManager
 }

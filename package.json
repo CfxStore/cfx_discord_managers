@@ -1,7 +1,7 @@
 {
-  "name": "cfxstoremanagers",
-  "version": "1.0.0",
-  "description": "This is the core for the CFX Bots.",
+  "name": "cfx_discord_managers",
+  "version": "1.0.3",
+  "description": "This is a Module that allows you to easily create moderation.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
