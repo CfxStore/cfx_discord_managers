@@ -7,15 +7,15 @@ class GuildUserManager {
   ---- ROLES ----
     */
 
-    addRole(role) {
+    addRole(role, message) {
         return message.member.roles.add(role.id);
     }
 
-    removeRole(role) {
+    removeRole(role, message) {
         return message.member.roles.remove(role.id);
     }
 
-    checkRole(user, role) {
+    checkRole(user, role, guild) {
         const member = guild.members.fetch(user);
         if (!member) return;
 

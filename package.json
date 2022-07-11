@@ -1,6 +1,6 @@
 {
   "name": "cfx_discord_managers",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "This is a Module that allows you to easily create moderation.",
   "main": "index.js",
   "scripts": {
