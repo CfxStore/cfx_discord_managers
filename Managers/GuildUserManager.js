@@ -1,8 +1,6 @@
 class GuildUserManager {
-    constructor(database, message, guild) {
+    constructor(database) {
         this.database = database;
-        this.message = message;
-        this.guild = guild;
     }
 
    /*
@@ -10,15 +8,15 @@ class GuildUserManager {
     */
 
     addRole(role) {
-        return this.message.member.roles.add(role.id);
+        return message.member.roles.add(role.id);
     }
 
     removeRole(role) {
-        return this.message.member.roles.remove(role.id);
+        return message.member.roles.remove(role.id);
     }
 
     checkRole(user, role) {
-        const member = this.guild.members.fetch(user);
+        const member = guild.members.fetch(user);
         if (!member) return;
 
         let hasRole = user.roles.cache.find(r => r.id === role);
@@ -30,23 +28,23 @@ class GuildUserManager {
    ---- MODERATION - BAN/KICK ----
      */
 
-    banUser(user, reason) {
-        const member = this.message.guild.members.fetch(user);
-        if (!member) return this.message.channel.send({content: "The given user cannot be found."});
+    banUser(user, reason, message) {
+        const member = message.guild.members.fetch(user);
+        if (!member) return message.channel.send({content: "The given user cannot be found."});
 
         user.ban({reason: reason})
     }
 
-    unbanUser(user) {
-        const banList = this.messag.guild.bans.fetch().then(bans => {
+    unbanUser(user, message) {
+        const banList = message.guild.bans.fetch().then(bans => {
             let findUser = bans.has(user.id)
-            if (!findUser) return this.message.channel.send({content: "This user isn't banned."});
+            if (!findUser) return message.channel.send({content: "This user isn't banned."});
 
-            this.message.guild.members.unban(user.id)
+            message.guild.members.unban(user.id)
         })
     }
 
-    kickUser(user, reason) {
+    kickUser(user, reason, message) {
         const member = message.guild.members.fetch(user);
         if (!member) return message.channel.send({content: "The given user cannot be found."});
 
@@ -58,7 +56,7 @@ class GuildUserManager {
  */
 
 
-    warnUser(user, reason){
+    warnUser(user, reason, message){
         let warnCount = this.database.get(`${user.id}.warns.active`)
         warnCount++
 
@@ -69,12 +67,12 @@ class GuildUserManager {
         this.database.set(`${user.id}.warns.history`, warnHistory)
 
         if(warnCount === 3){
-            if(!user.bannable) return this.message.channel.send({content: "This user cannot be banned."});
+            if(!user.bannable) return message.channel.send({content: "This user cannot be banned."});
             this.kickUser(user, reason)
         }
 
         if(warnCount === 5){
-            if(!user.bannable) return this.message.channel.send({content: "This user cannot be banned."});
+            if(!user.bannable) return message.channel.send({content: "This user cannot be banned."});
             this.banUser(user, reason)
         }
     }
